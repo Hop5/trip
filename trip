@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# DEV is going to be /dev/sda for SATA or /dev/nvme0n1 for M.2 NVME SSDs
+# We have to assign the device for parted to use
+DEV=/dev/sda
+echo "Welcome to trip (Test Recursively in Person) 0.1a" 
+echo "We are going to destroy the partition table in the $DEV disk"
+echo "After that AIKEN will start automagically on the 1"
+sleep 2.5s
+echo "Destroying the partition table right now"
+parted $DEV --script mktable gpt
+parted $DEV --script mktable msdos
+parted $DEV --script mktable gpt
+echo "Wiped the drives. Aiken is going to start in 1 second"
+sleep 1s
+1
+
